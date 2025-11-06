@@ -13,7 +13,7 @@ sudo systemctl enable hostapd dnsmasq
 
 **2. Prevent NetworkManager Interference**
 
-_sudo mkdir -p /etc/NetworkManager/conf.d
+sudo mkdir -p /etc/NetworkManager/conf.d
 
 sudo tee /etc/NetworkManager/conf.d/unmanaged-wlan0.conf >/dev/null <<'EOF'
 [keyfile]
@@ -43,13 +43,13 @@ EOF
 
 sudo systemctl daemon-reload
 
-sudo systemctl enable --now wlan0-static.service_
+sudo systemctl enable --now wlan0-static.service
 
 **4. Configure hostapd** --->  a format file attached for a 5Ghz AP
 
 **5. Configure dnsmasq for DHCP**
 
-_sudo mv /etc/dnsmasq.conf /etc/dnsmasq.conf.bak
+sudo mv /etc/dnsmasq.conf /etc/dnsmasq.conf.bak
 
 sudo tee /etc/dnsmasq.d/ap.conf >/dev/null <<'EOF'
 interface=wlan0
@@ -60,7 +60,7 @@ dhcp-option=option:dns-server,10.42.1.1
 domain=ap.lan
 EOF
 
-sudo systemctl enable dnsmasq_
+sudo systemctl enable dnsmasq
 
 6. **Restart all services** _--> maintain the order_
 
