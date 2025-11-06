@@ -1,0 +1,28 @@
+sudo tee /etc/hostapd/hostapd.conf >/dev/null <<'EOF'
+interface=wlan0
+driver=nl80211
+ssid=test_AP
+country_code=IN
+hw_mode=a
+channel=36
+ieee80211d=1
+ieee80211n=1
+ieee80211ac=1
+wmm_enabled=1
+auth_algs=1
+wpa=2
+wpa_key_mgmt=WPA-PSK
+rsn_pairwise=CCMP
+wpa_passphrase=1234567
+EOF
+
+sudo sed -i 's|^#\?DAEMON_CONF=.*|DAEMON_CONF="/etc/hostapd/hostapd.conf"|' /etc/default/hostapd
+
+sudo systemctl edit hostapd <<'EOF'
+[Unit]
+After=wlan0-static.service
+Wants=wlan0-static.service
+EOF
+
+sudo systemctl daemon-reload
+sudo systemctl enable hostapd
