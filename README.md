@@ -3,13 +3,13 @@ A concise guide to setting up Access Point (AP) and Client modes on Raspberry Pi
 
 **1. Install Required Packages**
 
-_sudo apt update
+sudo apt update
 
 sudo apt install -y hostapd dnsmasq
 
 sudo systemctl unmask hostapd
 
-sudo systemctl enable hostapd dnsmasq_
+sudo systemctl enable hostapd dnsmasq
 
 **2. Prevent NetworkManager Interference**
 
@@ -22,7 +22,7 @@ EOF
 
 sudo systemctl restart NetworkManager_
 
-**3. Assign Static IP for wlan0 **-_--> currently assigned with 10.42.1.1_
+**3. Assign Static IP for wlan0**  --> currently assigned with 10.42.1.1_
 
 _sudo tee /etc/systemd/system/wlan0-static.service >/dev/null <<'EOF'
 [Unit]
@@ -45,9 +45,9 @@ sudo systemctl daemon-reload
 
 sudo systemctl enable --now wlan0-static.service_
 
-4. Configure **hostapd** --->  a format file attached for a 5Ghz AP
+**4. Configure hostapd** --->  a format file attached for a 5Ghz AP
 
-5. Configure dnsmasq for DHCP
+**5. Configure dnsmasq for DHCP**
 
 _sudo mv /etc/dnsmasq.conf /etc/dnsmasq.conf.bak
 
